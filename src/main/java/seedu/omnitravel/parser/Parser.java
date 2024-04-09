@@ -18,7 +18,7 @@ public class Parser {
 
     private static Logger logger = Logger.getLogger("ParserLogger");
 
-
+    //@@author ChinYanXu
     /**
      * Obtains the list of travel activities
      *
@@ -34,7 +34,7 @@ public class Parser {
         }
         Ui.printLine();
     }
-
+    //@@author ChinYanXu
     /**
      * Handles the case where the add command is given as input
      *
@@ -60,20 +60,20 @@ public class Parser {
         String tag = (line.contains("/tag") && input.length == 4) ? input[3].trim() : "";
         TravelActivity activity;
         switch (commandType) {
-        case "accommodation":
-            activity = new Accommodation(description, date, duration, tag, "");
-            System.out.println("I added a new accommodation");
-            break;
-        case "food":
-            activity = new Food(description, date, duration, tag, "");
-            System.out.println("I added a new food activity");
-            break;
-        case "landmark":
-            activity = new Landmark(description, date, duration, tag, "");
-            System.out.println("I added a new landmark");
-            break;
-        default:
-            throw new OmniException("Unknown activity type");
+            case "accommodation":
+                activity = new Accommodation(description, date, duration, tag, "");
+                System.out.println("I added a new accommodation");
+                break;
+            case "food":
+                activity = new Food(description, date, duration, tag, "");
+                System.out.println("I added a new food activity");
+                break;
+            case "landmark":
+                activity = new Landmark(description, date, duration, tag, "");
+                System.out.println("I added a new landmark");
+                break;
+            default:
+                throw new OmniException("Unknown activity type");
         }
         list.addTravelActivity(activity);
         System.out.println(activity);
@@ -106,7 +106,7 @@ public class Parser {
         System.out.println(newActivity);
         Ui.printLine();
     }
-
+    //@@author ChinYanXu
     /**
      * Handles the case where the delete command is given as input
      *
@@ -121,7 +121,7 @@ public class Parser {
             throw new OmniException("Please specify which activity index or description to delete");
         }
     }
-
+    //@@author ChinYanXu
     /**
      * Handles the case where the check command is given as input
      *
