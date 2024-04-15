@@ -1,3 +1,4 @@
+<<<<<<< HEAD:docs/team/FileSaveSequence.puml
 @startuml
 actor User
 participant "readFile()" as readFile
@@ -5,6 +6,7 @@ participant "loadFileContents(TravelActivityList list)" as loadFileContents
 participant "accommodation:Accommodation" as Accommodation
 participant "food:Food" as Food
 participant "landmark:Landmark" as Landmark
+participant "general:TravelActivity" as General
 participant "list:TravelActivityList" as TravelActivityList
 participant "SetActivityStatus" as SetActivityStatus
 participant "s:Scanner" as Scanner
@@ -52,10 +54,20 @@ deactivate Scanner
         activate SetActivityStatus
         SetActivityStatus --> Landmark: Status handled
         deactivate SetActivityStatus
+    else General
+        loadFileContents -> General: list.addTravelActivity(general)
+        activate General
+        General -> TravelActivityList: list.addTravelActivity(general)
+        activate TravelActivityList
+        TravelActivityList --> General: added activity
+        deactivate TravelActivityList
+        General -> SetActivityStatus: setActivityStatus()
+        activate SetActivityStatus
+        SetActivityStatus --> General: Status handled
+        deactivate SetActivityStatus
     end
 end
 deactivate TravelActivityList
 deactivate loadFileContents
 deactivate readFile
-
 @enduml
