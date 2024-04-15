@@ -42,7 +42,7 @@ Given below are my contributions to the project.
 
 #### Enhancement to existing features
  * Added additional tests for existing features to increase coverage (Pull request [#197](https://github.com/AY2324S2-CS2113-T12-4/tp/pull/197) and [#225](https://github.com/AY2324S2-CS2113-T12-4/tp/pull/225))
- * Created new class to handle all exceptions thrown (Pull request [#114](https://github.com/AY2324S2-CS2113-T12-4/tp/pull/114)
+ * Created new class to handle all exceptions thrown (Pull request [#114](https://github.com/AY2324S2-CS2113-T12-4/tp/pull/114))
 
 
 #### Documentation
