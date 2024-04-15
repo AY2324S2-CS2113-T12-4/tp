@@ -40,7 +40,7 @@ public class Ui {
      * Prints line
      */
     public static void printLine(){
-        System.out.println("____________________________________________________________");
+        System.out.println("_______________________________________________________________________________");
     }
 
     /**
@@ -66,7 +66,8 @@ public class Ui {
      * @param exception The exception to be printed
      */
     public static void printNumberTooLargeException(NumberFormatException exception) {
-        System.out.println("Warning! " + exception.getMessage() + " number too large!");
+        System.out.println("Warning! " + exception.getMessage() + " number too large!\n" +
+                "or number format is wrong!");
         printLine();
     }
 
@@ -103,14 +104,26 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints out the error message for when the user inputs the date in the wrong format
+     */
+
     //@@author daryltay415
     public static void printDateTimeExceptionError(){
         System.out.println("Invalid date, please input the date in the following order: YYYY-MM-DD");
     }
 
+    /**
+     * Prints out the error message for when there is an error when saving the file
+     */
+
     public static void printSavingError(){
         System.out.println("Something went wrong when saving the file");
     }
+
+    /**
+     * Prints out the error message for when InterruptedException is thrown
+     */
 
     public static void printInterruptedError(){
         System.out.println("Warning Website might be down!");

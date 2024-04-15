@@ -95,13 +95,13 @@ public class TravelActivityList {
 
     //@@author ChinYanXu
     /**
-     * Removes travel activity from the travel activity list
-     * @param activityNumber The travel activity index number or description on the list
+     * Removes travel activity from the travel activity list using the travel activity index number
+     *
+     * @param activityNumber The index number of the travel activity that the user wants to remove
      */
-  
 
     public void removeTravelActivity(int activityNumber) throws OmniException {
-        assert activityNumber != 0 : "There is not activities in the list";
+        assert activityNumber != 0 : "There is no activities in the list";
         int indexOfActivity = activityNumber - 1;
         int initialListSize = noOfActivities;
         if(activityNumber > noOfActivities){
@@ -115,6 +115,13 @@ public class TravelActivityList {
         int newSize = noOfActivities;
         assert newSize == initialListSize - 1 : "There is an error with list size!";
     }
+
+    /**
+     * Overloaded version of removeTravelActivity function to enable user to remove travel activities from the travel
+     * activity list using the travel activity description
+     *
+     * @param activity The description of travel activity that the user wants to remove
+     */
 
     public void removeTravelActivity(String activity){
         int foundCounter = 0;
@@ -153,13 +160,11 @@ public class TravelActivityList {
     }
     //@@author ChinYanXu
     /**
-     * Finds all activities in the TravelActivity list that contains a keyword specified
-     * by the user.
+     * Finds all activities in the TravelActivity list that contains a keyword specified by the user.
      *
-     * @param activityName keyword specified by the user to find activities in the TravelActivity list
-     *                 related to the keyword.
+     * @param activityName keyword specified by the user to find travel activities in the TravelActivity list
+     *                 with description related to the keyword.
      */
-
 
     public void searchKeyword (String activityName) {
         int foundCounter = 0;
@@ -180,18 +185,22 @@ public class TravelActivityList {
     }
 
     /**
-     * Overloaded version of searchKeyword function to enable user to exclude certain activities from their search
+     * Overloaded version of searchKeyword function to enable user to exclude certain travel activities from their
+     * search
      *
-     * @param activityName The description of tasks that the user wants to find
-     * @param exclusion The keyword that the user uses to remove unwanted results from the search
+     * @param activityName The description of the travel activities that the user wants to find
+     * @param exclusion The keyword that the travel activities uses to remove unwanted results from the search
      */
 
     public void searchKeyword (String activityName, String exclusion) {
         int foundCounter = 0;
+        String lowerCaseActivityName = activityName.toLowerCase();
+        String lowerCaseExclusion = exclusion.toLowerCase();
         for (TravelActivity travelActivity : travelActivities) {
             assert !(foundCounter > travelActivities.size()) : "Error: There is more activities found than possible";
-            if (travelActivity.getPlan().contains(activityName) && !travelActivity.getPlan().contains(exclusion) &&
-                    !travelActivity.getPlan().isEmpty()) {
+            if (travelActivity.getPlan().toLowerCase().contains(lowerCaseActivityName)
+                    && !travelActivity.getPlan().toLowerCase().contains(lowerCaseExclusion)
+                    && !travelActivity.getPlan().isEmpty()) {
                 foundCounter += 1;
                 if (foundCounter == 1) {
                     System.out.println("Here are what you are looking for:");
@@ -289,6 +298,9 @@ public class TravelActivityList {
 
         int indexOfTask = taskNumber - 1;
         TravelActivity taggedTask = travelActivities.get(indexOfTask);
+        if (taggedTask.getTag().isBlank()){
+            throw new OmniException("Travel activity does not have a tag!");
+        }
         taggedTask.removeTag();
         System.out.println("Tag removed from the task:");
         System.out.println(taggedTask);
@@ -328,9 +340,9 @@ public class TravelActivityList {
 
     //@@author ChinYanXu
     /**
-     * Find all the tasks with a particular tag and prints them out
+     * Find all the travel activities with a particular tag and prints them out
      *
-     * @param tag The tag of tasks that the user wants to find
+     * @param tag The tag of travel activities that the user wants to find
      */
 
     public void findTag(String tag){
@@ -352,18 +364,19 @@ public class TravelActivityList {
     }
 
     /**
-     * Overloaded version of findtag function to enable user to exclude certain activities from their search
+     * Overloaded version of findtag function to enable user to exclude certain travel activities from their search
      *
-     * @param tag The tag of tasks that the user wants to find
+     * @param tag The tag of the travel activities that the user wants to find
      * @param exclude The keyword that the user uses to remove unwanted results from the search
      */
 
     public void findTag(String tag, String exclude){
         int foundCounter = 0;
+        String lowerCaseExclude = exclude.toLowerCase();
         for (TravelActivity travelActivity : travelActivities) {
             assert !(foundCounter > travelActivities.size()) : "Error: There is more activities found than possible";
             if (travelActivity.getTag().contains(tag) && !travelActivity.getTag().isEmpty() &&
-                    !travelActivity.getPlan().contains(exclude)) {
+                    !travelActivity.getPlan().toLowerCase().contains(lowerCaseExclude)) {
                 foundCounter += 1;
                 if (foundCounter == 1) {
                     System.out.println("Here are what you are looking for:");
@@ -377,9 +390,9 @@ public class TravelActivityList {
     }
 
     /**
-     * Find all the tasks of a particular type and prints them out
+     * Find all the travel activities of a particular type and prints them out
      *
-     * @param type The type of tasks that the user wants to find
+     * @param type The type of travel activities that the user wants to find
      */
 
     public void findType(String type){
@@ -396,7 +409,7 @@ public class TravelActivityList {
             }
         }
         if (foundCounter == 0) {
-            System.out.println("Sorry I could not find what you are looking for.");
+            System.out.println("Sorry, I could not find what you are looking for.");
         }
     }
 
@@ -404,7 +417,7 @@ public class TravelActivityList {
     /**
      * Overloaded version of findtype to enable user to exclude certain activities from their search
      *
-     * @param type The type of tasks that the user wants to find
+     * @param type The type of travel activities that the user wants to find
      * @param exclude The keyword that the user uses to remove unwanted results from the search
      *
      */
@@ -414,11 +427,12 @@ public class TravelActivityList {
         assert exclude != null && !exclude.isEmpty() : "Exclude parameter should not be null or empty";
 
         logger.log(Level.INFO, "Finding type: " + type + ", excluding: " + exclude);
-
+        String lowerCaseExclude = exclude.toLowerCase();
         for (TravelActivity activity : travelActivities) {
             assert !(foundCounter > travelActivities.size()) : "Error: There are more activities found than possible";
 
-            if (activity.getClass().getSimpleName().equalsIgnoreCase(type) && !activity.getPlan().contains(exclude)) {
+            if (activity.getClass().getSimpleName().equalsIgnoreCase(type)
+                    && !activity.getPlan().toLowerCase().contains(lowerCaseExclude)) {
                 foundCounter++;
                 if (foundCounter == 1) {
                     logger.log(Level.INFO, "Found matching activities:");
@@ -482,6 +496,9 @@ public class TravelActivityList {
 
         int indexOfTask = taskNumber - 1;
         TravelActivity task = travelActivities.get(indexOfTask);
+        if (task.getExpense().isBlank()){
+            throw new OmniException("Travel activity does not have a expense!");
+        }
         task.removeExpense();
         System.out.println("Expense removed from the task:");
         System.out.println(task);
@@ -513,6 +530,9 @@ public class TravelActivityList {
                     logger.log(Level.INFO, String.valueOf(tot));
                 }
             }
+        }
+        if(type.equalsIgnoreCase("travelactivity")){
+            type = "General";
         }
         System.out.println("The total expense for " + type + " travel activities is: $" + tot);
     }

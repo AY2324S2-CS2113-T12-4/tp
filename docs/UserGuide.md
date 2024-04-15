@@ -31,7 +31,7 @@ list via a Command Line Interface**.
 
 1. Ensure you have Java 11 installed in your Computer.
 
-2. Download the latest omni.jar from [here]().
+2. Download the latest omni.jar from [here](https://github.com/AY2324S2-CS2113-T12-4/tp/releases/tag/tpv2.1).
 
 3. Copy the file to the folder you want to use as the home folder for your chatbot.
 
@@ -58,7 +58,7 @@ ____________________________________________________________
 > 📒 Notes about the command format :
 > * The words that are in `UPPER_CASE` represents the parameters that the users are required to input
 > e.g. `delete INDEX`, `INDEX` is a parameter which can be used as `delete 1`.
-> * Commands such as `help`, `list` and `bye` do not require additional parameters. Hence, any extra parameters will be ignored. 
+> * Commands such as `help` and `bye` do not require additional parameters. Hence, any extra parameters will be ignored. 
 > e.g. `help 123` will just be intepreted as `help`.
 > * Words that are in square brackets such as `[/tag TAG]` indicates that it is
 > optional to include in the command.
@@ -168,17 +168,21 @@ ____________________________________________________________
 ```
 
 ### Find activity from the list using activity description : `find`
-Find an activity based on their description. All activities with the given description will be listed out.
+Find activities based on their description. All activities with the given description will be listed out.
 
 Format: `find DESCRIPTION [/exclude KEYWORD]`
-* `DESCRIPTION` has to match the activity description exactly to find the activity
-* `DESCRIPTION` can also be a keyword that is included in the description.
-* `/exclude KEYWORD` will exclude any keywords that appear in the resulting list based on what your description is.
 
-Examples of usage (assuming saizeriya is in list): 
+* `DESCRIPTION` has to be a word, a phrase or a segment of the activity description to find the activity
+* `KEYWORD` has to be a word, a phrase or a segment of the activity description to exclude the activity
+* `/exclude KEYWORD` will exclude any activity with `KEYWORD` found in the **description** of the activity
+
+Examples of usage (assuming saizeriya is in list):
 * `find saizeriya`
+* `find saizeriya /exclude pizza`
 
-Expected output:
+Expected outcome:
+Without `/exclude`
+
 ```
 ____________________________________________________________
 Here are what you are looking for:
@@ -188,9 +192,7 @@ ____________________________________________________________
 ```
 
 With `/exclude`:
-* `find saizeriya /exclude pizza`
 
-Expected output:
 ```
 ____________________________________________________________
 Here are what you are looking for:
@@ -210,17 +212,22 @@ Examples of usage:
 * `delete 1`
 * `delete Eiffel`
 
-Expected output:
+Expected outcome:
+When ACTIVITY is a number
 ```
 ____________________________________________________________
 I have removed this activity:
-Accommodation: Four Seasons Hotel :14 Mar 2025 :2 days
+1. Accommodation: Four Seasons Hotel :14 Mar 2025 :2 days
 ____________________________________________________________
 ```
+
+When ACTIVITY is a keyword
 ```
 ____________________________________________________________
 I have removed this activity:
 1. Landmark: Eiffel Tower :14 Mar 2025 :2 hours (go up tower)
+2. Landmark: Eiffel Tower Food Stand :14 Mar 2025 :1 hours (dinner)
+3. Accommodation: Hotel beside Eiffel Tower :14 Mar 2025 :2 days (rest)
 ____________________________________________________________
 ```
 
@@ -341,6 +348,7 @@ their travel activities.
 Format: `tag INDEX TAGNAME`
 
 * The `INDEX` must be a valid activity index.
+* There must not be any trailing spaces in `INDEX`.
 
 Example of usage:
 * `tag 1 activity 1`
@@ -359,6 +367,7 @@ Removes a tag from an existing travel activity.
 Format: `untag INDEX`
 
 * The `INDEX` must be a valid activity index.
+* * There must not be any trailing spaces in `INDEX`.
 
 Example of usage:
 * `untag 1 `
@@ -376,18 +385,30 @@ ____________________________________________________________
 Find an activity based on their tag. All activities with the given tag will be listed out.
 
 Format: `findtag TAG [/exclude KEYWORD]`
-* `TAG` has to match the activity tag exactly to find the activity
-* `/exclude KEYWORD` will exclude any keywords found in the **description** of the activity
+
+* `TAG` has to be a word, a phrase or a segment of the activity description to find the activity
+* `KEYWORD` has to be a word, a phrase or a segment of the activity description to exclude the activity
+* `/exclude KEYWORD` will exclude any activity with `KEYWORD` found in the **description** of the activity
 
 Examples of usage: 
 * `findtag spicy`
 * `findtag spicy /exclude mala`
 
 Expected outcome:
+Without `/exclude`
 ```
 ____________________________________________________________
 Here are what you are looking for:
 [ ] 1. Food: Mala Hotpot :14 Mar 2025 :2 hours (very spicy)
+[ ] 2. Food: McSpicy :16 Mar 2025 :1 hour (very spicy)
+____________________________________________________________
+```
+
+With `/exclude`
+```
+____________________________________________________________
+Here are what you are looking for:
+[ ] 1. Food: McSpicy :16 Mar 2025 :1 hour (very spicy)
 ____________________________________________________________
 ```
 
@@ -417,15 +438,18 @@ ____________________________________________________________
 Find an activity based on their type. All activities with the given type will be listed out.
 
 Format: `findtype TYPE [/exclude KEYWORD]`
-* `TYPE` has to match the activity type exactly to find the activity
+* `TYPE` has to be a word, a phrase or a segment of the activity description to find the activity
+* `KEYWORD` has to be a word, a phrase or a segment of the activity description to exclude the activity
 * The different types are `general`, `accommodation`, `food`, `landmark`
-* `/exclude KEYWORD` will exclude any keywords found in the **description** of the activity
+* `/exclude KEYWORD` will exclude any activity with `KEYWORD` found in the **description** of the activity
 
 Examples of usage: 
 * `findtype general`
 * `findtype general /exclude japan`
 
 Expected outcome:
+
+Without `/exclude`
 ```
 ____________________________________________________________
 Here are what you are looking for:
@@ -433,6 +457,15 @@ Here are what you are looking for:
 [ ] 2. General: Go to Hong Kong  :25 Aug 2025 :6 hours (with family)
 ____________________________________________________________
 ```
+
+With `/exclude`
+```
+____________________________________________________________
+Here are what you are looking for:
+[ ] 1. General: Go to Hong Kong  :25 Aug 2025 :6 hours (with family)
+____________________________________________________________
+```
+
 
 ### Adding an expense amount: `expense`
 
@@ -477,7 +510,7 @@ Calculates the total expense for all activities of the given type in the travel 
 
 Format: `totalexpense [/type TYPE]`
 
-* The `TYPE` must be a valid type (Accomodation, Food, Landmark, TravelActivity)
+* The `TYPE` must be a valid type (Accomodation, Food, Landmark, General)
 
 Example of usage:
 `totalexpense /type food`
