@@ -29,6 +29,7 @@ public class FileSave {
 
     /**
      * Reads data from file and loads it into a travel activity list
+     *
      * @param list The travel activity list to load data in to
      * @throws FileNotFoundException If the file does not exist
      */
@@ -88,6 +89,7 @@ public class FileSave {
 
     /**
      * Saves the travel activity list to the file specified by the file path
+     *
      * @param list The travel activity list to save to the file
      * @throws IOException If an I/o error occurs while writing to file
      */

@@ -206,9 +206,7 @@ public class Parser {
     public static void tagCommand(String line, TravelActivityList list) throws OmniException {
         assert line != null && !line.isEmpty() : "Command line should not be null or empty";
         assert list != null : "TravelActivityList should not be null";
-
         logger.log(Level.INFO, "Tagging command: " + line);
-
         String[] command = line.split(" ");
         if (command.length >= 3 && CheckParameters.isNumeric(command[1].trim())) {
             int listNumber = Integer.parseInt(command[1].trim());
@@ -239,9 +237,7 @@ public class Parser {
         assert command != null && command.length >= 2 : "Command array should not be null, empty or longer than " +
                 "length 2";
         assert list != null : "TravelActivityList should not be null";
-
         logger.log(Level.INFO, "Remove tag command: " + Arrays.toString(command));
-
         if (command.length == 2 && CheckParameters.isNumeric(command[1].trim())) {
             int listNumber = Integer.parseInt(command[1].trim());
             list.removeTag(listNumber);
