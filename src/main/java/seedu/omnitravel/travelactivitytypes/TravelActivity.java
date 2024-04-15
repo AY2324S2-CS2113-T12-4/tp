@@ -45,6 +45,7 @@ public class TravelActivity {
 
     /**
      * Sets the status of the activity to complete or incomplete
+     *
      * @param activityIsDone activity status
      */
     public void setActivityStatus(boolean activityIsDone){
@@ -53,6 +54,7 @@ public class TravelActivity {
 
     /**
      * Gets the description of the travel activity
+     *
      * @return The description of the travel activity
      */
     public String getPlan(){
@@ -61,6 +63,7 @@ public class TravelActivity {
 
     /**
      * Gets the status of the travel activity
+     *
      * @return boolean representing if activity is done or not
      */
     public boolean getActivityStatus() {
@@ -69,6 +72,7 @@ public class TravelActivity {
 
     /**
      * Sets the date of the travel activity
+     *
      * @param date the date to be set
      */
     public void setDate(LocalDate date){
@@ -77,6 +81,7 @@ public class TravelActivity {
 
     /**
      * Gets the date of the travel activity.
+     *
      * @return the date of the travel activity
      */
     public LocalDate getDate(){
@@ -85,6 +90,7 @@ public class TravelActivity {
 
     /**
      * Sets the duration of the travel activity.
+     *
      * @param duration the duration to be set
      */
     public void setDuration(String duration){
@@ -93,6 +99,7 @@ public class TravelActivity {
 
     /**
      * Gets the duration of the travel activity
+     *
      * @return the duration of the travel activity
      */
     public String getDuration(){
