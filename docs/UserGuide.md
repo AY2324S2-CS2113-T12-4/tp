@@ -510,7 +510,7 @@ Calculates the total expense for all activities of the given type in the travel 
 
 Format: `totalexpense [/type TYPE]`
 
-* The `TYPE` must be a valid type (Accomodation, Food, Landmark, TravelActivity)
+* The `TYPE` must be a valid type (Accomodation, Food, Landmark, General)
 
 Example of usage:
 `totalexpense /type food`

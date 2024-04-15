@@ -5,20 +5,20 @@
 
 actor User as user
 
-box OmniTravel
+
 participant ":OmniTravel" as OmniTravel
 
-box Ui
+
 participant ":Ui" as Ui
 
-box Parser
-participant ":Parser" as Parser
-end box
 
-box TravelActivityType
+participant ":Parser" as Parser
+
+
+
 participant ":TravelActivityList" as TravelActivityList
 participant ":TravelActivity" as TravelActivity
-end box
+
 
 user -> OmniTravel : "update 1 /date 2019-12-12 /duration 2 hours"
 activate OmniTravel
