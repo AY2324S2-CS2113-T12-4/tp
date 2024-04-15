@@ -150,7 +150,6 @@ public class OmniTravel {
         LogManager.getLogManager().reset();
         logger.setLevel(java.util.logging.Level.OFF);
     }
-    //@@author EugeneChanJiajun
 }
 
 
