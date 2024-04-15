@@ -45,6 +45,7 @@ public class Ui {
 
     /**
      * Prints the OmniException
+     *
      * @param exception The OmniException to be printed
      */
     public static void printException(OmniException exception){
@@ -54,6 +55,7 @@ public class Ui {
 
     /**
      * Prints the NoSuchElement Exception
+     *
      * @param exception The exception to be printed
      */
     public static void printNoSuchElementException(NoSuchElementException exception){
@@ -63,6 +65,7 @@ public class Ui {
 
     /**
      * Prints the NumberFormatException
+     *
      * @param exception The exception to be printed
      */
     public static void printNumberTooLargeException(NumberFormatException exception) {
@@ -131,6 +134,7 @@ public class Ui {
 
     /**
      * Prints out the activity in a list
+     *
      * @param activity The travel activity
      * @param activityIndex The index of the activity
      */
@@ -144,7 +148,6 @@ public class Ui {
         if(activity.getExpense() != null && !activity.getExpense().isEmpty()){
             System.out.print(" (" + activity.getExpense() + ")");
         }
-
         System.out.println();
     }
 

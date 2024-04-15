@@ -255,6 +255,7 @@ public class Parser {
     //@@author daryltay415
     /**
      * Handles the case where the update command is given as input
+     *
      * @param line The update command given by the user
      * @param list The list of travel activities
      * @throws OmniException Thrown if update index, date, duration is not given
@@ -356,9 +357,7 @@ public class Parser {
     public static void expenseCommand(String line, TravelActivityList list) throws OmniException {
         assert line != null && !line.isEmpty() : "Command line should not be null or empty";
         assert list != null : "TravelActivityList should not be null";
-
         logger.log(Level.INFO, "Expense command: " + line);
-
         String[] command = line.split(" ");
         if (command.length == 3 && CheckParameters.isNumeric(command[1].trim())) {
             int listNumber = Integer.parseInt(command[1].trim());
@@ -383,9 +382,7 @@ public class Parser {
     public static void removeExpenseCommand(String[] command, TravelActivityList list) throws OmniException {
         assert command != null && command.length >= 2 : "Command array should not be null or empty";
         assert list != null : "TravelActivityList should not be null";
-
         logger.log(Level.INFO, "Remove expense command: " + Arrays.toString(command));
-
         if (command.length == 2 && CheckParameters.isNumeric(command[1].trim())) {
             int listNumber = Integer.parseInt(command[1].trim());
             list.removeExpense(listNumber);
@@ -423,6 +420,7 @@ public class Parser {
     //@@author ChenKangg
     /**
      * Handles the case whereby the command is listtags
+     *
      * @param command The command given by the user
      * @param list The travel activity list
      * @throws OmniException Throws an exception when the command is in an invalid format
@@ -430,9 +428,7 @@ public class Parser {
     public static void listTagsCommand(String[] command, TravelActivityList list) throws OmniException {
         assert command != null && command.length >= 1 : "Command array should not be null or empty";
         assert list != null : "TravelActivityList should not be null";
-
         logger.log(Level.INFO, "List tags command: " + Arrays.toString(command));
-
         Ui.printLine();
         if (command.length == 1) {
             logger.log(Level.INFO, "Listing tags");
@@ -448,6 +444,7 @@ public class Parser {
     //@@author daryltay415
     /**
      * Handles the case whereby the command is change
+     *
      * @param line The input given by the user
      * @throws OmniException Throws an exception when the parameters are invalid
      */
